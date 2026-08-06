@@ -7,7 +7,11 @@
         "dev": "tsx watch src/server.ts",
         "build": "tsc",
         "start": "node dist/src/server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format:check": "npx @biomejs/biome format ./src",
+        "format:fix": "npx @biomejs/biome format --write ./src",
+        "lint:check" : "npx @biomejs/biome lint ./src",
+        "lint:fix" : "npx @biomejs/biome lint --write ./src"
     },
     "keywords": [],
     "author": "",

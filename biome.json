@@ -15,7 +15,20 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"preset": "recommended"
+			"preset": "recommended",
+			"suspicious": {
+				 "noExplicitAny" : "warn"
+			},
+			"complexity": {
+				"noCommaOperator": "info"
+			},
+			"correctness":{
+				"noUnusedFunctionParameters" :"off"
+			},
+			"style" : {
+				"noNonNullAssertion" : "info",
+				"useNodejsImportProtocol" : "info"
+			}
 		}
 	},
 	"javascript": {

@@ -10,8 +10,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "format:check": "npx @biomejs/biome format ./src",
         "format:fix": "npx @biomejs/biome format --write ./src",
-        "lint:check" : "npx @biomejs/biome lint ./src",
-        "lint:fix" : "npx @biomejs/biome lint --write ./src"
+        "lint:check": "npx @biomejs/biome lint ./src",
+        "lint:fix": "npx @biomejs/biome lint --write ./src"
     },
     "keywords": [],
     "author": "",
@@ -25,6 +25,7 @@
         "cors": "^2.8.6",
         "dotenv": "^17.4.2",
         "express": "^5.2.1",
+        "google-auth-library": "^11.0.0",
         "http-status": "^2.1.0",
         "jsonwebtoken": "^9.0.3",
         "pg": "^8.22.0"

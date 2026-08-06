@@ -47,14 +47,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:5000//api/v1/auth/register",
+              "raw": "http://localhost:5000/api/v1/auth/register",
               "protocol": "http",
               "host": [
                 "localhost"
               ],
               "port": "5000",
               "path": [
-                "",
                 "api",
                 "v1",
                 "auth",

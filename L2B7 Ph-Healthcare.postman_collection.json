@@ -156,7 +156,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"idToken\": \"\"\n}",
+              "raw": "{\n    \"idToken\": \"{{supabase_service_role_api_key_18pn}}sudR1FAO5GgNcF9dp24J49VkMfkWtkpxRau_srZA6jCEVj896Vhe5PVaHw8oeHh5oWg8Rets9lhvkBuxxa8Zq-LODS0I9mLgbpyYKKthvOa3sl9mGTvquvbfGWYmwMxF3DHDxxzjxGkVFMZxF3-Yi585XE38cMy1kMHn8JQTF7NhFQ67EJAp78q27JFgZjiQ_ybbG4X9k31lG6zb9pZL2KNLLBlGgg\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -193,6 +193,10 @@
     {
       "key": "refreshToken",
       "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_18pn",
+      "secret": true
     }
   ]
 }

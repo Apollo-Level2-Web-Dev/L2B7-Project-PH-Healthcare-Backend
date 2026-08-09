@@ -39,7 +39,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"password\": \"12345678\"\n}",
+              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"patient13@gmail.com\",\n    \"password\": \"aA@12345678\",\n    \"price\" : \"100tk\"\n    // \"patient\" : {\n    //     \"age\" : 12\n    // }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -182,6 +182,45 @@
         }
       ],
       "description": "ID-token verification only. The frontend runs Google Sign-In, gets an ID token, and POSTs it here; the server verifies it against `GOOGLE_CLIENT_ID` and then issues **its own** JWTs. Google is never involved again after this one call — no client secret, no callback/redirect URL, no stored Google session.\n\nSee `GOOGLE-LOGIN-TESTING.md` in the repo for how to obtain a real ID token for the `googleIdToken` variable."
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Zod Check",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Patient1\",\n    \"age\" : 12,\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/zod",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "zod"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "variable": [

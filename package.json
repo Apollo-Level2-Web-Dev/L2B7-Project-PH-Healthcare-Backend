@@ -28,7 +28,8 @@
         "google-auth-library": "^11.0.0",
         "http-status": "^2.1.0",
         "jsonwebtoken": "^9.0.3",
-        "pg": "^8.22.0"
+        "pg": "^8.22.0",
+        "zod": "^4.4.3"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.7",

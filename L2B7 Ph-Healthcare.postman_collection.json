@@ -39,7 +39,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"patient13@gmail.com\",\n    \"password\": \"aA@12345678\",\n    \"price\" : \"100tk\"\n    // \"patient\" : {\n    //     \"age\" : 12\n    // }\n}",
+              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@12345678\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -94,7 +94,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"password\": \"12345678\"\n}",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@@@12345678\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -116,6 +116,74 @@
               ]
             },
             "description": "Expected: 200 with `data: { accessToken, refreshToken, user }`.\n\nOther outcomes from `AuthService.loginUser`:\n- unknown email → 404 \"User not found\"\n- `status: BLOCKED` → 403 \"User is blocked\"\n- `isDeleted` or `status: DELETED` → 404 \"User is deleted\"\n- account with no password (Google-only sign-in) → 400 \"This account uses Google sign-in. Please continue with Google.\"\n- wrong password → 401 \"Invalid credentials\""
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"newPassword\": \"aA@@@12345678\",\n    \"otp\" : \"294443\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
           },
           "response": []
         }

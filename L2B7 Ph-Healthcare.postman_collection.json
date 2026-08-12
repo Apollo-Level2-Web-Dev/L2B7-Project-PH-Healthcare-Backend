@@ -1,0 +1,308 @@
+{
+  "info": {
+    "_postman_id": "2d6846a7-1dd4-44dd-bfdc-2e34c2505a56",
+    "name": "L2B7 Ph-Healthcare",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28720851"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Patient",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "",
+                  "pm.test(\"registers with 201\", () => pm.response.to.have.status(201));",
+                  "",
+                  "if (res && res.data && res.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"accessToken\", res.data.accessToken);",
+                  "    pm.collectionVariables.set(\"refreshToken\", res.data.refreshToken || \"\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Expected: **201**. In one Prisma transaction this creates a `User` (`role: PATIENT`, `status: ACTIVE`, `emailVerified: false`, `authProvider: CREDENTIALS`, bcrypt-hashed password) and its matching `Patient` row.\n\nReturns `data: { accessToken, refreshToken, user, patient }`, and also sets both tokens as cookies. The test script stores the tokens in collection variables for the protected requests below.\n\nThere is no email verification step — the OTP/verify-email/forget-password/reset-password flows went away with better-auth."
+          },
+          "response": []
+        },
+        {
+          "name": "Credential Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "",
+                  "pm.test(\"logs in with 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "if (res && res.data && res.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"accessToken\", res.data.accessToken);",
+                  "    pm.collectionVariables.set(\"refreshToken\", res.data.refreshToken || \"\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@@@12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Expected: 200 with `data: { accessToken, refreshToken, user }`.\n\nOther outcomes from `AuthService.loginUser`:\n- unknown email → 404 \"User not found\"\n- `status: BLOCKED` → 403 \"User is blocked\"\n- `isDeleted` or `status: DELETED` → 404 \"User is deleted\"\n- account with no password (Google-only sign-in) → 400 \"This account uses Google sign-in. Please continue with Google.\"\n- wrong password → 401 \"Invalid credentials\""
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"newPassword\": \"aA@@@12345678\",\n    \"otp\" : \"294443\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "All seven endpoints under `/api/v1/auth`. Protected routes (`/me`, `/change-password`, `/logout`) are gated by `checkAuth(ADMIN, DOCTOR, PATIENT, SUPER_ADMIN)` — every role passes, so the gate is really just \"authenticated\"."
+    },
+    {
+      "name": "Auth - Google",
+      "item": [
+        {
+          "name": "Google Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "",
+                  "pm.test(\"logs in with Google\", () => pm.response.to.have.status(200));",
+                  "",
+                  "if (res && res.data && res.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"accessToken\", res.data.accessToken);",
+                  "    pm.collectionVariables.set(\"refreshToken\", res.data.refreshToken || \"\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idToken\": \"{{supabase_service_role_api_key_18pn}}sudR1FAO5GgNcF9dp24J49VkMfkWtkpxRau_srZA6jCEVj896Vhe5PVaHw8oeHh5oWg8Rets9lhvkBuxxa8Zq-LODS0I9mLgbpyYKKthvOa3sl9mGTvquvbfGWYmwMxF3DHDxxzjxGkVFMZxF3-Yi585XE38cMy1kMHn8JQTF7NhFQ67EJAp78q27JFgZjiQ_ybbG4X9k31lG6zb9pZL2KNLLBlGgg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/google",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "google"
+              ]
+            },
+            "description": "Expected: 200, returning the application's own `accessToken` / `refreshToken` (both in the body and as cookies).\n\nThree resolution paths, in order:\n1. **Known `googleId`** — resolved by the stable `sub` claim, never by email, because a Google email can change and `sub` cannot.\n2. **Matching email on an existing account** — links it: sets `googleId`, forces `emailVerified: true`, and flips `authProvider` to `GOOGLE` *only* if the account had no password. An existing password is preserved. Role and status always come from the database, never from Google.\n3. **New email** — provisions `User` (`role: PATIENT`, `password: null`, `authProvider: GOOGLE`, `emailVerified: true`, `image` from the `picture` claim) plus its `Patient` row in one transaction.\n\nAccount standing is checked on every path, including before the link-write, so a blocked or deleted account is refused without being mutated."
+          },
+          "response": []
+        }
+      ],
+      "description": "ID-token verification only. The frontend runs Google Sign-In, gets an ID token, and POSTs it here; the server verifies it against `GOOGLE_CLIENT_ID` and then issues **its own** JWTs. Google is never involved again after this one call — no client secret, no callback/redirect URL, no stored Google session.\n\nSee `GOOGLE-LOGIN-TESTING.md` in the repo for how to obtain a real ID token for the `googleIdToken` variable."
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Zod Check",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Patient1\",\n    \"age\" : 12,\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/zod",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "zod"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_18pn",
+      "secret": true
+    }
+  ]
+}

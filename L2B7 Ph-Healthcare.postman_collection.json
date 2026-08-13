@@ -65,6 +65,40 @@
           "response": []
         },
         {
+          "name": "Verify Email",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"otp\" : \"153805\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/verify-email",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "Credential Login",
           "event": [
             {
@@ -250,6 +284,44 @@
         }
       ],
       "description": "ID-token verification only. The frontend runs Google Sign-In, gets an ID token, and POSTs it here; the server verifies it against `GOOGLE_CLIENT_ID` and then issues **its own** JWTs. Google is never involved again after this one call — no client secret, no callback/redirect URL, no stored Google session.\n\nSee `GOOGLE-LOGIN-TESTING.md` in the repo for how to obtain a real ID token for the `googleIdToken` variable."
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Upload Profile Image",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "uuid": "22cab8f4-902c-4f14-8088-5a7bb068674a",
+                  "src": "/C:/Users/samin/Downloads/images/616072449_1494924225969511_1553364002771507521_n.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/user/profile-image",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "New Request",

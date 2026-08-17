@@ -324,6 +324,42 @@
       ]
     },
     {
+      "name": "Appointment",
+      "item": [
+        {
+          "name": "Book Appointment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"doctorId\": \"019fec13-9694-71bc-a106-4b742d539916\",\r\n    \"appointmentDate\": \"2026-08-25T10:00:00.000Z\",\r\n    \"notes\": \"First-time consultation\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/appointment/book-appointment",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "appointment",
+                "book-appointment"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "New Request",
       "request": {
         "method": "GET",

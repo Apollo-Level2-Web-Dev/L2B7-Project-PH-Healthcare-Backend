@@ -9,13 +9,13 @@ export interface IRegisterPatientPayload {
 	name: string;
 	email: string;
 	password: string;
-	patient : {
-		contactNumber ?: string 
-	}
+	patient: {
+		contactNumber?: string;
+	};
 }
 export interface IVerifyEmailPayload {
 	email: string;
-	otp : string;
+	otp: string;
 }
 
 export interface IRequestUser {
@@ -30,10 +30,10 @@ export interface IGoogleLoginPayload {
 }
 
 export interface IForgotPasswordPayload {
-	email : string
+	email: string;
 }
 export interface IResetPasswordPayload {
-	email : string;
-	newPassword : string;
-	otp : string;
+	email: string;
+	newPassword: string;
+	otp: string;
 }

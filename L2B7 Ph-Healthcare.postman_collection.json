@@ -39,7 +39,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@12345678\"\n}",
+              "raw": "{\n    \"name\": \"Patient1\",\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@@@12345678\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -197,7 +197,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"newPassword\": \"aA@@@12345678\",\n    \"otp\" : \"294443\"\n}",
+              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"newPassword\": \"aA@@@12345678\",\n    \"otp\" : \"593707\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -352,6 +352,123 @@
                 "v1",
                 "appointment",
                 "book-appointment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pay Appointment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"appointmentId\" : \"e1164231-1fb3-4f9f-9dd4-ba53ee9c8886\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/appointment/pay-appointment",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "appointment",
+                "pay-appointment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Appointment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"appointmentId\" : \"6ba0df2d-ec05-4b01-bd67-247c171efe79\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/appointment/cancel-appointment",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "appointment",
+                "cancel-appointment"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "Apply As Doctor",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "uuid": "8a17995d-1919-4b69-900f-eb348e8dddfc",
+                  "src": "/C:/Users/samin/Downloads/242014049_Risalat_Ul_Haque_Chowdhury_OpenEndedLab.pdf"
+                },
+                {
+                  "key": "additionalFiles",
+                  "type": "file",
+                  "uuid": "ccc227c0-9c20-48b0-a4ad-bca90c2eab48",
+                  "src": [
+                    "/C:/Users/samin/Downloads/Algorithm_Lab_BFS_DFS_Graph_Theory_Lab.pdf",
+                    "/C:/Users/samin/Downloads/Algorithm_Lab_LCS.pdf",
+                    "/C:/Users/samin/Downloads/Algorithm_Lab_Knapsack_01_DP.pdf",
+                    "/C:/Users/samin/Downloads/Algorithm_Lab_Huffman_Coding_Greedy_Algorithm.pdf"
+                  ]
+                },
+                {
+                  "key": "data",
+                  "value": "{\n  \"user\": {\n    \"name\": \"Dr. Sarah Jenkins\",\n    \"email\": \"dr.sarah.jenkins@example.com\"\n  },\n  \"doctor\": {\n    \"address\": \"123 Medical Plaza, Suite 400, New York, NY\",\n    \"specialization\": \"Cardiology\",\n    \"licenseNumber\": \"MED-2026-98765\",\n    \"qualifications\": \"MD, FACC - Harvard Medical School\",\n    \"experienceYears\": 12,\n    \"bio\": \"Dedicated cardiologist with over a decade of experience specializing in non-invasive cardiovascular imaging and preventative heart care.\",\n    \"consultationFee\": 150.00,\n    \"contactNumber\": \"+1-555-0199\"\n  }\n}\n",
+                  "type": "text",
+                  "uuid": "12629a7d-028b-4a9b-9867-7edec63c26fd"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/doctor/apply-as-doctor",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "doctor",
+                "apply-as-doctor"
               ]
             }
           },

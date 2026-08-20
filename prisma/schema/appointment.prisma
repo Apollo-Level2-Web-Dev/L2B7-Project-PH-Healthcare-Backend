@@ -1,12 +1,12 @@
 model Apppointment {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    status AppointmentStatus @default(PENDING)
+  status AppointmentStatus @default(PENDING)
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    payment Payment?
+  payment Payment?
 
-    @@map("appointments")
+  @@map("appointments")
 }

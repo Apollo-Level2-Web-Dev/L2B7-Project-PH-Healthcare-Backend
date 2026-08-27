@@ -19,7 +19,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Samin Ravi\",\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@@@12345678\",\n    \"patient\": {\n        \"contactNumber\": \"+8801700000000\"\n    }\n}",
+              "raw": "{\n    \"name\": \"Samin Ravi\",\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"password\": \"aA@@@12345678\",\n    \"patient\": {\n        \"contactNumber\": \"+8801700000000\"\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -68,7 +68,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"otp\": \"123456\"\n}",
+              "raw": "{\n    \"email\": \"mentor.saminravi@gmail.com\",\n    \"otp\": \"565173\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -117,7 +117,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"saminravi.ph@gmail.com\",\n    \"password\": \"aA@@@12345678\"\n}",
+              "raw": "{\n    \"email\": \"testerdoctor@gmail.com\",\n    \"password\": \"Tester@doctor12345\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -469,7 +469,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/doctor/all-doctors?page=1&limit=10&sortBy=createdAt&sortOrder=desc",
+              "raw": "{{baseUrl}}/doctor/all-doctors",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -480,19 +480,23 @@
               "query": [
                 {
                   "key": "page",
-                  "value": "1"
+                  "value": "1",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
-                  "value": "10"
+                  "value": "10",
+                  "disabled": true
                 },
                 {
                   "key": "sortBy",
-                  "value": "createdAt"
+                  "value": "createdAt",
+                  "disabled": true
                 },
                 {
                   "key": "sortOrder",
-                  "value": "desc"
+                  "value": "desc",
+                  "disabled": true
                 },
                 {
                   "key": "searchTerm",
@@ -562,7 +566,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/doctor/public/available-today?page=1&limit=10&sortBy=createdAt&sortOrder=desc",
+              "raw": "{{baseUrl}}/doctor/public/available-today",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -574,19 +578,23 @@
               "query": [
                 {
                   "key": "page",
-                  "value": "1"
+                  "value": "1",
+                  "disabled": true
                 },
                 {
                   "key": "limit",
-                  "value": "10"
+                  "value": "10",
+                  "disabled": true
                 },
                 {
                   "key": "sortBy",
-                  "value": "createdAt"
+                  "value": "createdAt",
+                  "disabled": true
                 },
                 {
                   "key": "sortOrder",
-                  "value": "desc"
+                  "value": "desc",
+                  "disabled": true
                 },
                 {
                   "key": "searchTerm",
@@ -691,7 +699,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"startDateTime\": \"2026-08-28T09:00:00.000Z\",\n    \"endDateTime\": \"2026-08-28T13:00:00.000Z\",\n    \"meetingLink\": \"https://meet.google.com/abc-defg-hij\"\n}",
+              "raw": "{\n    \"startDateTime\": \"2026-08-27T15:00:00.000Z\",\n    \"endDateTime\": \"2026-08-27T16:00:00.000Z\",\n    \"meetingLink\": \"https://meet.google.com/abc-defg-hij\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -817,7 +825,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/schedule/todays-schedule?doctorId={{doctorId}}&page=1&limit=10",
+              "raw": "{{baseUrl}}/schedule/todays-schedule?doctorId=1f427227-c076-4c8d-b63c-06baae533ecf&page=1&limit=10",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -828,7 +836,7 @@
               "query": [
                 {
                   "key": "doctorId",
-                  "value": "{{doctorId}}"
+                  "value": "1f427227-c076-4c8d-b63c-06baae533ecf"
                 },
                 {
                   "key": "page",
@@ -879,14 +887,14 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/schedule/publish-schedule/a0f0379f-4d38-43a7-bbbf-fb074bfbf5a9",
+              "raw": "{{baseUrl}}/schedule/publish-schedule/507ca2a8-bb7b-4f1b-8edf-72c7c30569ca",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "schedule",
                 "publish-schedule",
-                "a0f0379f-4d38-43a7-bbbf-fb074bfbf5a9"
+                "507ca2a8-bb7b-4f1b-8edf-72c7c30569ca"
               ]
             },
             "description": "Expected: **200**. DOCTOR only, on their own schedule. Flips `status` from `DRAFT` to `PUBLISHED`, making it visible/bookable to patients. Fails with 409 if already published."
@@ -961,7 +969,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"scheduleId\": \"{{scheduleId}}\"\n}",
+              "raw": "{\n    \"scheduleId\": \"507ca2a8-bb7b-4f1b-8edf-72c7c30569ca\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1383,7 +1391,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"appointmentId\": \"{{appointmentId}}\",\n    \"findings\": \"Mild seasonal allergic rhinitis, no signs of infection.\",\n    \"medicines\": [\n        {\n            \"name\": \"Cetirizine 10mg\",\n            \"dosage\": \"1 tablet\",\n            \"duration\": \"7 days\",\n            \"instructions\": \"Take once daily at night\"\n        },\n        {\n            \"name\": \"Saline Nasal Spray\",\n            \"dosage\": \"2 sprays per nostril\",\n            \"duration\": \"10 days\",\n            \"instructions\": \"Use twice daily\"\n        }\n    ]\n}",
+              "raw": "{\n    \"appointmentId\": \"107522b7-3762-4771-a8c4-6e34c48fe88e\",\n    \"findings\": \"Mild seasonal allergic rhinitis, no signs of infection.\",\n    \"medicines\": [\n        {\n            \"name\": \"Cetirizine 10mg\",\n            \"dosage\": \"1 tablet\",\n            \"duration\": \"7 days\",\n            \"instructions\": \"Take once daily at night\"\n        },\n        {\n            \"name\": \"Saline Nasal Spray\",\n            \"dosage\": \"2 sprays per nostril\",\n            \"duration\": \"10 days\",\n            \"instructions\": \"Use twice daily\"\n        }\n    ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1410,13 +1418,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/prescription/{{appointmentId}}",
+              "raw": "{{baseUrl}}/prescription/107522b7-3762-4771-a8c4-6e34c48fe88e",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "prescription",
-                "{{appointmentId}}"
+                "107522b7-3762-4771-a8c4-6e34c48fe88e"
               ]
             },
             "description": "Expected: **200**, or **404** if no prescription exists yet for that appointment. PATIENT/DOCTOR (own appointment)/ADMIN/SUPER_ADMIN."

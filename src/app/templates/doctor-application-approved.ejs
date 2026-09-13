@@ -4,17 +4,41 @@
     <meta charset="UTF-8" />
     <title>Application Approved</title>
     <style>
-      body { font-family: Arial, sans-serif; background: #f7f7f7; color: #333; }
-      .container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-      .footer { margin-top: 30px; font-size: 12px; color: #888; }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        color: #333;
+      }
+      .container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #888;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h2>Congratulations, Dr. <%= name %>!</h2>
-      <p>Your application to join PH Healthcare System as a doctor has been reviewed and approved.</p>
-      <p>You can now log in and start managing your schedule and consultations.</p>
-      <div class="footer">&copy; PH Healthcare System. All rights reserved.</div>
+      <p>
+        Your application to join PH Healthcare System as a doctor has been
+        reviewed and approved.
+      </p>
+      <p>
+        You can now log in and start managing your schedule and consultations.
+        Your temporary password is: <strong><%= password %></strong>. Please
+        change it after your first login for security purposes.
+      </p>
+      <div class="footer">
+        &copy; PH Healthcare System. All rights reserved.
+      </div>
     </div>
   </body>
 </html>

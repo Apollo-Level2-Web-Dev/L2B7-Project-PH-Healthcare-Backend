@@ -91,17 +91,17 @@ const applyAsDoctor = async (
 
 	console.log({ additionalFilesUploadResults });
 
-	const randomDoctorPassword = Math.random().toString(36).slice(-8);
+	// const randomDoctorPassword = Math.random().toString(36).slice(-8);
 
-	const hashedPassword = await bcrypt.hash(
-		randomDoctorPassword,
-		Number(config.bcrypt_salt_rounds),
-	);
+	// const hashedPassword = await bcrypt.hash(
+	// 	randomDoctorPassword,
+	// 	Number(config.bcrypt_salt_rounds),
+	// );
 
 	const doctorApplication = await prisma.user.create({
 		data: {
 			...payload.user,
-			password: hashedPassword,
+			// password: hashedPassword,
 			role: Role.DOCTOR,
 			needPasswordChange: true,
 			doctor: {
@@ -125,7 +125,7 @@ const applyAsDoctor = async (
 	});
 
 
-	const expirationSeconds = 60 * 60 
+	const expirationSeconds = 60 * 60
 
 	const otpKey = `doctor-application-otp:${payload.user.email}`
 	const otpValue = crypto.randomInt(100000, 1000000).toString();
@@ -147,7 +147,7 @@ const applyAsDoctor = async (
 
 	const templateData = {
 		name: payload.user.name,
-		email : payload.user.email,
+		email: payload.user.email,
 		otp: otpValue,
 		expirationMinutes: expirationSeconds / 60,
 	};
@@ -164,7 +164,7 @@ const applyAsDoctor = async (
 	return doctorApplication;
 };
 
-const verifyDoctorEmail = async (payload : IVerifyDoctorEmailPayload) => {
+const verifyDoctorEmail = async (payload: IVerifyDoctorEmailPayload) => {
 	const otp = payload.otp;
 	const email = payload.email.trim().toLowerCase();
 
@@ -211,7 +211,7 @@ const verifyDoctorEmail = async (payload : IVerifyDoctorEmailPayload) => {
 
 }
 
-const approveDoctor = async (payload : IApproveDoctorPayload, reviewer : RequestUser) => {
+const approveDoctor = async (payload: IApproveDoctorPayload, reviewer: RequestUser) => {
 	const { doctorId, verificationStatus, rejectionReason } = payload;
 
 	const existingDoctor = await prisma.doctor.findUnique({
@@ -251,9 +251,17 @@ const approveDoctor = async (payload : IApproveDoctorPayload, reviewer : Request
 		);
 	}
 
+	const randomDoctorPassword = Math.random().toString(36).slice(-8);
+
+	const hashedPassword = await bcrypt.hash(
+		randomDoctorPassword,
+		Number(config.bcrypt_salt_rounds),
+	);
+
 	const updatedDoctor = await prisma.doctor.update({
 		where: { id: doctorId },
 		data: {
+			password: hashedPassword,
 			verificationStatus,
 			rejectionReason:
 				verificationStatus === DoctorVerificationStatus.REJECTED
@@ -277,6 +285,7 @@ const approveDoctor = async (payload : IApproveDoctorPayload, reviewer : Request
 	const templateData = {
 		name: updatedDoctor.name,
 		reason: updatedDoctor.rejectionReason,
+		password: isApproved ? randomDoctorPassword : undefined,
 	};
 
 
@@ -357,8 +366,8 @@ const getAllDoctors = async (query: IQuery) => {
 	andConditions.push({ isDeleted: false });
 
 	const allDoctors = await prisma.doctor.findMany({
-		where : {
-			AND : andConditions.length > 0 ? andConditions : undefined
+		where: {
+			AND: andConditions.length > 0 ? andConditions : undefined
 		},
 
 		take: limit,
@@ -370,9 +379,9 @@ const getAllDoctors = async (query: IQuery) => {
 			[sortBy]: sortOrder
 		},
 
-		include:{
+		include: {
 			user: {
-				omit:{
+				omit: {
 					password: true
 				}
 			},
@@ -401,7 +410,7 @@ const getAllDoctors = async (query: IQuery) => {
 	}
 }
 
-const updateDoctorProfile = async (payload : IUpdateDoctorProfilePayload, user : RequestUser) => {
+const updateDoctorProfile = async (payload: IUpdateDoctorProfilePayload, user: RequestUser) => {
 	const existingDoctor = await prisma.doctor.findUnique({
 		where: { userId: user.userId },
 	});
@@ -453,7 +462,9 @@ const getAvailableDoctorByTodaysSchedule = async (query: IQuery) => {
 						lt: startOfTomorrow,
 						gt: now,
 					},
-				} } },
+				}
+			}
+		},
 	];
 
 	if (query.searchTerm) {
@@ -504,7 +515,7 @@ const getAvailableDoctorByTodaysSchedule = async (query: IQuery) => {
 						gt: now,
 					},
 				},
-				orderBy: { [sortBy] : sortOrder },
+				orderBy: { [sortBy]: sortOrder },
 				select: {
 					id: true,
 					startDateTime: true,

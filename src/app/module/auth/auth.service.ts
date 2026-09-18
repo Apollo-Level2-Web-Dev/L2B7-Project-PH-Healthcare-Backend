@@ -48,6 +48,9 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
 	const otpKey = `patient-registration-otp:${email}`;
 	const otpValue = crypto.randomInt(100000, 1000000).toString();
 
+	if (config.node_env === "development")
+		console.log(`[dev] OTP for ${email}: ${otpValue}`);
+
 	await redisClient.set(otpKey, otpValue, {
 		expiration: {
 			type: "EX",
@@ -523,6 +526,9 @@ const forgotPassword = async (payload: IForgotPasswordPayload) => {
 	}
 
 	const otp = crypto.randomInt(100000, 1000000).toString();
+
+	if (config.node_env === "development")
+		console.log(`[dev] Forgot-password OTP for ${email}: ${otp}`);
 
 	const key = `forgor-password-otp:${isUserExist.email}`;
 

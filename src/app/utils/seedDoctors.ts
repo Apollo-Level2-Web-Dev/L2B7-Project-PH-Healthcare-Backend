@@ -485,9 +485,72 @@ const doctors = [
 		experienceYears: 11,
 		bio: "Orthopedic surgeon for knee and hip replacement, osteoporosis, spine problems and bone fractures.",
 		consultationFee: 1200,
-		contactNumber: "01711000040",
+		contactNumber: "01711000040", 
 	},
 ];
+
+// 5 extra doctors per specialization above. Each focus entry becomes one doctor.
+const specialtyProfiles = [
+	{ specialization: "Cardiology", qualifications: "MBBS, MD (Cardiology)", baseFee: 1400, bio: "Cardiologist managing chest pain, high blood pressure, heart rhythm problems and heart failure.", focus: ["echocardiography", "preventive cardiology", "arrhythmia management", "heart failure clinics", "lipid disorders"] },
+	{ specialization: "Gynecology", qualifications: "MBBS, FCPS (Obs & Gynae)", baseFee: 1100, bio: "Gynecologist providing antenatal care, family planning and treatment of menstrual and hormonal disorders.", focus: ["high-risk pregnancy", "infertility", "laparoscopic gynecologic surgery", "menopause care", "PCOS management"] },
+	{ specialization: "Neurology", qualifications: "MBBS, MD (Neurology)", baseFee: 1300, bio: "Neurologist treating headache, seizures, stroke, dizziness and nerve disorders.", focus: ["stroke rehabilitation", "epilepsy", "movement disorders", "headache and migraine", "peripheral neuropathy"] },
+	{ specialization: "Dermatology", qualifications: "MBBS, DDV, FCPS (Dermatology)", baseFee: 1000, bio: "Dermatologist for skin infections, acne, eczema, pigmentation and hair loss.", focus: ["cosmetic dermatology", "pediatric skin disease", "psoriasis", "vitiligo", "laser treatment"] },
+	{ specialization: "Orthopedics", qualifications: "MBBS, MS (Orthopedics)", baseFee: 1200, bio: "Orthopedic surgeon treating fractures, joint pain, back pain and musculoskeletal injuries.", focus: ["knee replacement", "spine surgery", "arthroscopy", "pediatric orthopedics", "trauma surgery"] },
+	{ specialization: "Pediatrics", qualifications: "MBBS, FCPS (Pediatrics)", baseFee: 900, bio: "Pediatrician caring for children's fever, infections, nutrition, vaccination and development.", focus: ["childhood asthma", "child nutrition", "developmental delay", "pediatric infections", "adolescent health"] },
+	{ specialization: "Gastroenterology", qualifications: "MBBS, MD (Gastroenterology)", baseFee: 1300, bio: "Gastroenterologist treating acidity, ulcers, IBS, constipation and digestive disorders.", focus: ["endoscopy", "inflammatory bowel disease", "irritable bowel syndrome", "pancreatic disorders", "GI bleeding"] },
+	{ specialization: "Psychiatry", qualifications: "MBBS, MD (Psychiatry)", baseFee: 1200, bio: "Psychiatrist treating depression, anxiety, insomnia, bipolar disorder and stress-related problems.", focus: ["child and adolescent psychiatry", "addiction medicine", "anxiety disorders", "OCD", "geriatric psychiatry"] },
+	{ specialization: "ENT", qualifications: "MBBS, FCPS (ENT)", baseFee: 1000, bio: "ENT specialist for ear pain, hearing loss, sinusitis, tonsillitis and voice problems.", focus: ["sinus surgery", "hearing loss", "pediatric ENT", "voice disorders", "vertigo"] },
+	{ specialization: "Endocrinology", qualifications: "MBBS, MD (Endocrinology)", baseFee: 1300, bio: "Endocrinologist managing diabetes, thyroid disease, obesity and hormonal imbalance.", focus: ["type 1 diabetes", "thyroid disorders", "obesity management", "osteoporosis", "adrenal disorders"] },
+	{ specialization: "Nephrology", qualifications: "MBBS, MD (Nephrology)", baseFee: 1300, bio: "Nephrologist treating kidney disease, high creatinine, kidney stones and electrolyte problems.", focus: ["dialysis", "kidney transplant care", "diabetic kidney disease", "glomerular disease", "hypertension-related kidney disease"] },
+	{ specialization: "Pulmonology", qualifications: "MBBS, MD (Chest Diseases)", baseFee: 1200, bio: "Pulmonologist treating asthma, COPD, chronic cough, pneumonia and breathing difficulty.", focus: ["sleep apnea", "interstitial lung disease", "tuberculosis", "bronchoscopy", "asthma control"] },
+	{ specialization: "Oncology", qualifications: "MBBS, FCPS (Medicine), MD (Oncology)", baseFee: 1500, bio: "Oncologist diagnosing and treating cancers with chemotherapy and coordinated cancer care.", focus: ["breast cancer", "lung cancer", "gastrointestinal cancers", "blood cancers", "palliative care"] },
+	{ specialization: "Urology", qualifications: "MBBS, MS (Urology)", baseFee: 1200, bio: "Urologist treating kidney stones, urinary tract problems, prostate enlargement and male health.", focus: ["endourology", "prostate disease", "male infertility", "pediatric urology", "urinary incontinence"] },
+	{ specialization: "Ophthalmology", qualifications: "MBBS, FCPS (Ophthalmology)", baseFee: 1000, bio: "Eye specialist for vision problems, cataract, glaucoma, red eye and diabetic eye disease.", focus: ["cataract surgery", "glaucoma", "retina", "pediatric ophthalmology", "LASIK and refractive surgery"] },
+	{ specialization: "Rheumatology", qualifications: "MBBS, MD (Rheumatology)", baseFee: 1200, bio: "Rheumatologist treating arthritis, joint swelling, gout, lupus and autoimmune disease.", focus: ["rheumatoid arthritis", "gout", "lupus", "ankylosing spondylitis", "osteoarthritis"] },
+	{ specialization: "Hematology", qualifications: "MBBS, FCPS (Hematology)", baseFee: 1300, bio: "Hematologist treating anemia, bleeding disorders, thalassemia and blood cancers.", focus: ["thalassemia", "hemophilia", "leukemia", "iron deficiency anemia", "bone marrow disorders"] },
+	{ specialization: "General Surgery", qualifications: "MBBS, FCPS (Surgery)", baseFee: 1100, bio: "General surgeon for hernia, appendix, gallbladder stones, piles and soft tissue lumps.", focus: ["laparoscopic surgery", "hernia repair", "breast surgery", "colorectal surgery", "thyroid surgery"] },
+	{ specialization: "Neurosurgery", qualifications: "MBBS, MS (Neurosurgery)", baseFee: 1600, bio: "Neurosurgeon treating brain tumors, head injury, spinal cord problems and disc prolapse.", focus: ["brain tumor surgery", "spine surgery", "head injury", "pediatric neurosurgery", "minimally invasive spine procedures"] },
+	{ specialization: "Plastic Surgery", qualifications: "MBBS, MS (Plastic Surgery)", baseFee: 1500, bio: "Plastic surgeon for burns, reconstructive surgery, scar revision and cosmetic procedures.", focus: ["burn reconstruction", "cleft lip and palate", "cosmetic surgery", "hand surgery", "scar revision"] },
+	{ specialization: "Dentistry", qualifications: "BDS, FCPS (Dental Surgery)", baseFee: 800, bio: "Dental surgeon treating toothache, cavities, gum disease and providing dental check-ups.", focus: ["root canal treatment", "orthodontics", "dental implants", "pediatric dentistry", "cosmetic dentistry"] },
+	{ specialization: "Physical Medicine & Rehabilitation", qualifications: "MBBS, FCPS (Physical Medicine)", baseFee: 1000, bio: "Rehabilitation specialist for back pain, neck pain, stroke recovery and physical disability.", focus: ["stroke rehabilitation", "spinal cord injury", "musculoskeletal pain", "post-surgical rehabilitation", "cerebral palsy"] },
+	{ specialization: "Internal Medicine", qualifications: "MBBS, FCPS (Medicine)", baseFee: 1000, bio: "Medicine specialist managing fever, diabetes, hypertension and other adult general health problems.", focus: ["diabetes and hypertension", "fever of unknown origin", "chronic disease management", "preventive health check-ups", "multi-system illness"] },
+	{ specialization: "Family Medicine", qualifications: "MBBS, MCPS (Family Medicine)", baseFee: 700, bio: "Family physician providing primary care for all ages, routine check-ups and common illnesses.", focus: ["women's health", "child health", "elderly care", "lifestyle disease", "preventive care"] },
+	{ specialization: "Infectious Disease", qualifications: "MBBS, MD (Infectious Diseases)", baseFee: 1100, bio: "Infectious disease specialist treating dengue, typhoid, tuberculosis and complex infections.", focus: ["dengue", "tuberculosis", "HIV care", "antibiotic resistance", "travel medicine"] },
+	{ specialization: "Cardiac Surgery", qualifications: "MBBS, MS (Cardiovascular & Thoracic Surgery)", baseFee: 2000, bio: "Cardiac surgeon performing bypass surgery, valve surgery and surgery for congenital heart disease.", focus: ["coronary bypass surgery", "valve replacement", "congenital heart surgery", "aortic surgery", "minimally invasive cardiac surgery"] },
+	{ specialization: "Neonatology", qualifications: "MBBS, MD (Neonatology)", baseFee: 1100, bio: "Neonatologist caring for newborns, premature babies, neonatal jaundice and breathing problems.", focus: ["premature infant care", "neonatal jaundice", "NICU care", "newborn feeding problems", "neonatal infections"] },
+	{ specialization: "Pediatric Surgery", qualifications: "MBBS, MS (Pediatric Surgery)", baseFee: 1300, bio: "Pediatric surgeon treating hernia, undescended testis, birth defects and surgical problems in children.", focus: ["neonatal surgery", "pediatric laparoscopy", "hypospadias repair", "pediatric tumors", "congenital anomalies"] },
+	{ specialization: "Allergy & Immunology", qualifications: "MBBS, MD (Allergy & Immunology)", baseFee: 1100, bio: "Allergy specialist treating allergic rhinitis, food allergy, skin allergy and immune disorders.", focus: ["food allergy", "allergic rhinitis", "drug allergy", "urticaria", "immunodeficiency"] },
+	{ specialization: "Geriatrics", qualifications: "MBBS, MD (Geriatric Medicine)", baseFee: 1000, bio: "Geriatrician providing care for elderly patients with memory problems, falls and multiple chronic diseases.", focus: ["dementia care", "fall prevention", "polypharmacy review", "elderly nutrition", "palliative care"] },
+	{ specialization: "Sports Medicine", qualifications: "MBBS, MS (Orthopedics), Diploma in Sports Medicine", baseFee: 1200, bio: "Sports medicine doctor treating sports injuries, ligament tears, muscle strain and fitness problems.", focus: ["ligament injuries", "running injuries", "shoulder injuries", "return-to-play rehabilitation", "exercise prescription"] },
+	{ specialization: "Hepatology", qualifications: "MBBS, MD (Hepatology)", baseFee: 1300, bio: "Liver specialist treating fatty liver, hepatitis B and C, jaundice and cirrhosis.", focus: ["fatty liver disease", "hepatitis B", "hepatitis C", "liver cirrhosis", "liver transplant evaluation"] },
+	{ specialization: "Pain Medicine", qualifications: "MBBS, FCPS (Anesthesiology), Fellowship in Pain Medicine", baseFee: 1200, bio: "Pain specialist managing chronic back pain, neck pain, nerve pain and cancer pain.", focus: ["interventional pain procedures", "chronic back pain", "neuropathic pain", "cancer pain", "headache management"] },
+	{ specialization: "Nutrition & Dietetics", qualifications: "MBBS, MSc (Clinical Nutrition)", baseFee: 800, bio: "Clinical nutritionist providing diet plans for weight management, diabetes, kidney disease and pregnancy.", focus: ["weight management", "diabetic diet", "pediatric nutrition", "renal diet", "pregnancy nutrition"] },
+];
+
+const firstNames = ["Arif", "Nadia", "Rafiq", "Sumaiya", "Habibur", "Farzana", "Touhid", "Marium", "Shakil", "Rumana", "Monir", "Tania", "Saiful", "Afsana", "Zahid", "Nabila", "Rashed"];
+const lastNames = ["Hossain", "Akter", "Rahman", "Islam", "Chowdhury", "Khan", "Sarker", "Ahmed", "Talukder", "Miah"];
+const locations = ["Dhanmondi, Dhaka", "Banani, Dhaka", "Mohammadpur, Dhaka", "Bashundhara R/A, Dhaka", "Motijheel, Dhaka", "GEC Circle, Chattogram", "Nasirabad, Chattogram", "Shaheb Bazar, Rajshahi", "Khulna Sadar, Khulna", "Amberkhana, Sylhet", "Kandirpar, Cumilla", "Jahaj Company Mor, Rangpur", "Band Road, Barishal", "Ganginarpar, Mymensingh", "Narayanganj Sadar, Narayanganj"];
+
+const extraDoctors = specialtyProfiles.flatMap((profile, s) =>
+	profile.focus.map((focus, k) => {
+		const i = s * profile.focus.length + k;
+		const serial = doctors.length + i + 1;
+		const licensePrefix = profile.specialization === "Dentistry" ? "BMDC-D" : "BMDC-A";
+
+		return {
+			name: `Dr. ${firstNames[i % firstNames.length]} ${lastNames[Math.floor(i / firstNames.length) % lastNames.length]}`,
+			email: `shafayat.ph+dr${serial}@gmail.com`,
+			address: `House ${(i % 40) + 1}, Road ${(i % 12) + 1}, ${locations[i % locations.length]}`,
+			specialization: profile.specialization,
+			licenseNumber: `${licensePrefix}-${10230 + serial}`,
+			qualifications: profile.qualifications,
+			experienceYears: 4 + ((s * 3 + k * 5) % 21),
+			bio: `${profile.bio} Special interest in ${focus}.`,
+			consultationFee: profile.baseFee + k * 100,
+			contactNumber: `0171100${String(serial).padStart(4, "0")}`,
+		};
+	}),
+);
 
 const seedDoctors = async () => {
 	const hashedPassword = await bcrypt.hash(
@@ -495,7 +558,7 @@ const seedDoctors = async () => {
 		Number(config.bcrypt_salt_rounds),
 	);
 
-	for (const { name, email, ...doctor } of doctors) {
+	for (const { name, email, ...doctor } of [...doctors, ...extraDoctors]) {
 		const isDoctorExist = await prisma.user.findUnique({ where: { email } });
 
 		if (isDoctorExist) {

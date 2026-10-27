@@ -7,6 +7,7 @@
         "dev": "tsx watch src/server.ts",
         "build": "tsup",
         "start": "node dist/server.js",
+        "seed:doctors": "tsx src/app/utils/seedDoctors.ts",
         "test": "echo \"Error: no test specified\" && exit 1",
         "format:check": "npx @biomejs/biome format ./src",
         "format:fix": "npx @biomejs/biome format --write ./src",

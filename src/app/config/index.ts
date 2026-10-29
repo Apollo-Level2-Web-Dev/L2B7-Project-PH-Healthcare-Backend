@@ -40,4 +40,8 @@ export default {
 	bkash_app_key: process.env.BKASH_APP_KEY!,
 	bkash_app_secret: process.env.BKASH_APP_SECRET!,
 	bkash_callback_url: process.env.BKASH_CALLBACK_URL!,
+	openrouter_api_key: process.env.OPENROUTER_API_KEY!,
+	opernrouter_chat_model: process.env.OPENROUTER_CHAT_MODEL!,
+	openrouter_fallback_chat_models: process.env.OPENROUTER_FALLBACK_CHAT_MODELS,
+	openrouter_embedding_model: process.env.OPENROUTER_EMBEDDING_MODEL!
 };

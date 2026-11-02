@@ -10,6 +10,7 @@
         "seed:doctors": "tsx src/app/utils/seedDoctors.ts",
         "test": "echo \"Error: no test specified\" && exit 1",
         "test:openrouter": "tsx src/app/scripts/testOpenRouter.ts",
+        "index:doctors":"tsx src/app/scripts/indexDoctors.ts",
         "format:check": "npx @biomejs/biome format ./src",
         "format:fix": "npx @biomejs/biome format --write ./src",
         "lint:check": "npx @biomejs/biome lint ./src",
